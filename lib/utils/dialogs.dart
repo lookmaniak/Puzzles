@@ -1,8 +1,15 @@
-import 'package:demogame/utils/botonGamer.dart';
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:demogame/main.dart';
+import 'package:demogame/screens/Home.dart';
+import 'package:demogame/utils/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:imagebutton/imagebutton.dart';
 
 class Dialogs {
+  
+
   static alert(BuildContext context,
       {String title = '',
       String message: '',
@@ -19,7 +26,7 @@ class Dialogs {
           return new WillPopScope(
             onWillPop: () async => false,
             child: Dialog(
-                backgroundColor: Colors.transparent,
+                //backgroundColor: Colors.transparent,
                 shape: RoundedRectangleBorder(
                     borderRadius:
                         BorderRadius.circular(12.0)), //this right here
@@ -114,24 +121,7 @@ class Dialogs {
                                               child: Container(
                                                 margin: EdgeInsets.only(
                                                     top: 10, right: 10),
-                                                child: BotonGamer(
-                                                    text: "X",
-                                                    colorCapa1: Color.fromRGBO(
-                                                        167, 1, 22, 1),
-                                                    colorCapa2: Color.fromRGBO(
-                                                        214, 1, 21, 1),
-                                                    colorCapa3: Color.fromRGBO(
-                                                        214, 1, 21, 1),
-                                                    colorCapa4: Color.fromRGBO(
-                                                        255, 111, 126, 1),
-                                                    width: 40,
-                                                    height: 40,
-                                                    textSize: 30,
-                                                    borderSize: 5,
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    }),
+                                                
                                               ),
                                             )
                                           ],
@@ -164,21 +154,7 @@ class Dialogs {
                                         Container(
                                           margin: EdgeInsets.only(
                                               top: 10, right: 10),
-                                          child: BotonGamer(
-                                              text: "X",
-                                              colorCapa1:
-                                                  Color.fromRGBO(167, 1, 22, 1),
-                                              colorCapa2:
-                                                  Color.fromRGBO(214, 1, 21, 1),
-                                              colorCapa3:
-                                                  Color.fromRGBO(214, 1, 21, 1),
-                                              colorCapa4: Color.fromRGBO(
-                                                  255, 111, 126, 1),
-                                              width: 40,
-                                              height: 40,
-                                              textSize: 30,
-                                              borderSize: 5,
-                                              onPressed: onContinue),
+                                          
                                         ),
                                       ],
                                     ),
@@ -290,21 +266,7 @@ class Dialogs {
                                         Container(
                                           margin: EdgeInsets.only(
                                               top: 10, right: 10),
-                                          child: BotonGamer(
-                                              text: "Aceptar",
-                                              colorCapa1: Color.fromRGBO(
-                                                  237, 166, 0, 1),
-                                              colorCapa2: Color.fromRGBO(
-                                                  255, 206, 0, 1),
-                                              colorCapa3: Color.fromRGBO(
-                                                  250, 229, 0, 1),
-                                              colorCapa4: Color.fromRGBO(
-                                                  251, 237, 85, 0.5),
-                                              borderSize: 10,
-                                              width: 100,
-                                              height: 50,
-                                              textSize: 30,
-                                              onPressed: onContinue),
+                                          
                                         ),
                                       ],
                                     ),
@@ -425,8 +387,8 @@ class Dialogs {
       {String title = '',
       String message: '',
       IconData icon = Icons.warning,
-      double width = 300,
-      double height = 220,
+      double width = 450,
+      double height = 300,
       Color color = Colors.cyan,
       VoidCallback onConfirmX,
       VoidCallback onConfirmO}) {
@@ -446,35 +408,46 @@ class Dialogs {
                     child: Container(
                       height: height * 0.2,
                       width: width,
-                      padding: EdgeInsets.all(5),
+                      padding: EdgeInsets.all(35),
                       decoration: BoxDecoration(
-                          //color: color,
-                          borderRadius:
-                              BorderRadius.vertical(top: Radius.circular(5))),
+                          image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: AssetImage(
+                                "assets/image/background/bg_dialog.png",
+                              )
+                          ),
+                          
+                      ),
                       child: Column(
                         children: <Widget>[
                           Expanded(
                             child: Stack(
                               children: <Widget>[
                                 Container(
-                                    child: Text(
-                                  message,
-                                  style: TextStyle(
-                                      color: Color.fromRGBO(190, 145, 0, 1),
-                                      fontSize: 50,
-                                      fontFamily: "Gamer",
-                                      height: 0.90),
-                                  textAlign: TextAlign.center,
-                                )),
-                                Container(
-                                    child: Text(
-                                  message,
-                                  style: TextStyle(
-                                      color: Colors.yellowAccent,
-                                      fontSize: 50,
-                                      fontFamily: "Gamer"),
-                                  textAlign: TextAlign.center,
-                                )),
+                                  width: 200,
+                                  height: 200,
+                                  padding: EdgeInsets.all(10.0),
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                            "assets/image/background/bg_dialog_title.png",
+                                          )
+                                      ),
+                                      
+                                  ),
+                                  child: Center(
+                                          child: Text(
+                                          message,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 40,
+                                              fontFamily: "All The Way",
+                                              height: 0.90
+                                              ),
+                                          textAlign: TextAlign.center,
+                                      ),
+                                  )),
+                                
                               ],
                             ),
                           ),
@@ -487,28 +460,9 @@ class Dialogs {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        BotonGamer(
-                            text: "X",
-                            textSize: 100,
-                            colorCapa1: Color.fromRGBO(0, 19, 81, 1),
-                            colorCapa2: Color.fromRGBO(0, 52, 176, 1),
-                            colorCapa3: Color.fromRGBO(0, 88, 236, 1),
-                            colorCapa4: Color.fromRGBO(85, 143, 242, 0.5),
-                            width: 100,
-                            height: 120,
-                            borderSize: 10,
-                            onPressed: onConfirmX),
-                        BotonGamer(
-                            text: "O",
-                            textSize: 100,
-                            colorCapa1: Color.fromRGBO(5, 52, 0, 1),
-                            colorCapa2: Color.fromRGBO(7, 102, 0, 1),
-                            colorCapa3: Color.fromRGBO(12, 163, 0, 1),
-                            colorCapa4: Color.fromRGBO(44, 176, 28, 0.5),
-                            width: 100,
-                            height: 120,
-                            borderSize: 10,
-                            onPressed: onConfirmO)
+                          Text('hello'),
+                          Text('hello2'),
+                          Text('hello3'),
                       ],
                     ),
                   )
@@ -518,4 +472,172 @@ class Dialogs {
           );
         });
   }
+
+  static void showSetting(BuildContext context) {
+  final AudioCache _buttonClick = AudioCache(
+        prefix: 'music/',
+        fixedPlayer: AudioPlayer()..setReleaseMode(ReleaseMode.STOP),
+      );
+
+    void _playButtonTapped() {
+        _buttonClick.play('mouse_click_sound_effect.mp3');
+        print('pressed');
+    }
+
+    showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(content: StatefulBuilder(
+                    builder: (BuildContext context, StateSetter setState) {
+                  return 
+                  Dialog(
+            backgroundColor: Colors.transparent,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0)), //this right here
+            child: Container(
+              padding: EdgeInsets.all(35),
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: AssetImage(
+                        "assets/image/background/bg_dialog.png",
+                      )
+                  ),
+              ),
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(top:10, bottom: 10, left: 20, right: 20),
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: AssetImage(
+                                  "assets/image/background/bg_dialog_title.png",
+                                )
+                            ),
+                            
+                        ),
+                        child: Center(
+                            child: Text(
+                                "SETTING",
+                                style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 40,
+                                fontFamily: "All The Way",
+                                height: 0.90
+                            ),
+                            textAlign: TextAlign.center,
+                          )
+                        )
+                      ),
+                    ],
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: AssetImage(
+                                        "assets/image/background/setting_sound_icon.png",
+                                      )
+                                  ),
+                              )
+                            ),
+                          ],
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Container(
+                                child: Text(
+                                      "SOUND",
+                                      style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 30,
+                                      fontFamily: "All The Way",
+                                      height: 0.90
+                                  ),
+                                  textAlign: TextAlign.left,
+                                )
+                              ),
+                            ],
+                          ),
+                        ),
+                        Column(
+                            children: [
+                              ValueListenableBuilder(
+                              valueListenable: isMusicOn,
+                              builder: (context, value, widget) {
+                                return ImageButton(
+                                    children: <Widget>[],
+                                    width: 150,
+                                    height: 42,
+                                    paddingTop: 5,
+                                    pressedImage: Image.asset(
+                                      isMusicOn.value ? "assets/image/buttons/bt_setting_togle_off.png" : "assets/image/buttons/bt_setting_togle_on.png",
+                                    ),
+                                    unpressedImage: Image.asset(
+                                      isMusicOn.value ? "assets/image/buttons/bt_setting_togle_off.png" : "assets/image/buttons/bt_setting_togle_on.png",
+                                    ),
+                                    onTap: () {
+                                      _playButtonTapped();
+
+                                      setState(() {
+                                        if(isMusicOn.value) {
+                                          isMusicOn.value = false; 
+                                          soundsEffects.audioPlayer.stop();
+                                        } else {
+                                          isMusicOn.value = true;
+                                          soundsEffects.playLocalMusic("music/main_bgm.mp3");
+                                        }
+                                      });
+                                    },
+                                );
+                              },
+                            ),
+                              
+                            ],
+                          )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+                  /* Container(
+                    height: MediaQuery.of(context).size.height / 3,
+                    child: Center(
+                      child: Switch(
+                        value: isMusicOn.value,
+                        onChanged: (value) {
+                          setState(() {
+                            isMusicOn.value = value;
+                            print(isMusicOn.value);
+                          });
+                        },
+                        activeTrackColor: Colors.lightGreenAccent,
+                        activeColor: Colors.green,
+                      ),
+                    ),
+                  ); */
+                }
+                )
+                );
+              },
+            );
+          }
 }
+
+

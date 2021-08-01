@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   audioplayers: ^0.14.2
   flare_flutter: ^2.0.1
+  imagebutton: ^0.0.6
 
 dev_dependencies:
   flutter_test:
@@ -39,6 +40,7 @@ flutter:
   assets:
     - assets/image/botons/
     - assets/image/dialogs/
+    - assets/image/buttons/
     - assets/image/background/
     - assets/music/
     - assets/animations/
@@ -54,6 +56,16 @@ flutter:
     - family: Gamer
       fonts:
         - asset: assets/fonts/Gamer.ttf
+    - family: All The Way
+      fonts:
+        - asset: assets/fonts/atwt_the_sun.otf
+    - family: Corbel
+      fonts:
+        - asset: assets/fonts/corbel_bold.ttf
+    - family: Ocr Abt
+      fonts:
+        - asset: assets/fonts/ocr_abt.ttf
+
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
